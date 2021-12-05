@@ -19,7 +19,7 @@ jobs:
           python-version: 3.9
       - name: Install os packages
         run: |
-          sudo apt-get install -y xsel
+          sudo apt-get install -y xsel xvfb
       - name: Install poetry
         uses: snok/install-poetry@v1.0.0
         with:
@@ -36,4 +36,4 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       - name: unit test
         run: |
-          poetry run python -m unittest discover -s tests/
+          xvfb-run poetry run python -m unittest discover -s tests/
